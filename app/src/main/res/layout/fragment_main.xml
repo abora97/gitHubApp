@@ -8,24 +8,44 @@
         android:background="@color/white"
         tools:context=".screens.main.fragmentMain.MainFragment">
 
-        <EditText
-            android:id="@+id/edSearch"
+        <LinearLayout
+            android:id="@+id/laySearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/rounded_off_gray_5"
+            android:orientation="horizontal"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:background="@drawable/rounded_off_gray_5"
-            android:drawableStart="@drawable/ic_search"
-            android:drawablePadding="@dimen/_8sdp"
-            android:hint="Search"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:maxLines="1"
-            android:padding="@dimen/_4sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edSearch"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="@dimen/_8sdp"
+                android:hint="Search"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="@dimen/_4sdp"
+                />
+
+            <ImageView
+                android:id="@+id/ivQrScanner"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_qr_scanner"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recUsers"
@@ -36,7 +56,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edSearch"
+            app:layout_constraintTop_toBottomOf="@+id/laySearch"
             tools:listitem="@layout/item_users" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

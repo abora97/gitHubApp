@@ -70,9 +70,8 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(),
 
         })
 
-        edSearch.setOnClickListener {
+        ivQrScanner.setOnClickListener {
             startActivityForResult(Intent(requireActivity(), QrScannerActivity::class.java), 200)
-
         }
 
     }
