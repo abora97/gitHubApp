@@ -10,6 +10,6 @@ import retrofit2.http.Query
 interface RetrofitApi {
 
     @GET("search/repositories")
-    fun getUsers(@Query("q") searchWord:String,@Query("page") page:Int,@Query("per_page")perPage:Int): Deferred<Response<UserRepositoriesDataModel>>
+    fun getUsers(@Query("q") searchWord:String?,@Query("page") page:Int?,@Query("per_page")perPage:Int): Deferred<Response<UserRepositoriesDataModel>>
 
 }

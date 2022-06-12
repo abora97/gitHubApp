@@ -7,7 +7,7 @@ import com.abora.githubtask.data.remote.networkHandling.NetworkStatus
 
 class MainRepository constructor(var apiService: RetrofitApi) : NetworkResult() {
 
-    suspend fun getUsers(networkStatus: NetworkStatus, searchWord:String,page:Int,perPage:Int=20) = getResult({
+    suspend fun getUsers(networkStatus: NetworkStatus, searchWord:String?, page: Int?, perPage:Int=20) = getResult({
         apiService.getUsers(searchWord,page,perPage).await()
     }, networkStatus)
 

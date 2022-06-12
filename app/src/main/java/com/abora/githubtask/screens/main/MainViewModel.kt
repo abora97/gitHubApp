@@ -12,25 +12,35 @@ import kotlinx.coroutines.launch
 class MainViewModel constructor(var mainRepository: MainRepository, val context: Context) :
     BaseViewModel() {
 
+    //Fields
+    val searchWordLiveData=MutableLiveData<String>()
+    var pageLiveData=MutableLiveData<Int>().apply {
+        value = 1
+    }
 
     //Responses
     var getUserDataResponse = MutableLiveData<List<UserRepositoriesData>>()
 
 
-    //pagenation
+    //pagination
     var isloading: Boolean = false
     var lastPage: Boolean = false
 
 
-    fun getUsers(searchWord: String,page:Int) {
+    fun getUsers() {
+
+        if (searchWordLiveData.value.isNullOrBlank()){
+            return
+        }
+
         loading.value = true
-        isloading = false
+        isloading = true
         viewModelScope.launch {
-            mainRepository.getUsers(networkStatus, searchWord,page).let {
+            mainRepository.getUsers(networkStatus, searchWordLiveData.value,pageLiveData.value).let {
                 loading.value = false
                 isloading = false
                 lastPage = if (it.data != null){
-                    getUserDataResponse.postValue(it.data.userRepositoriesData)
+                    getUserDataResponse.value=it.data.userRepositoriesData
                     false
                 }else{
                     true
