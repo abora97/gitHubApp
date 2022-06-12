@@ -16,6 +16,7 @@ import com.abora.githubtask.screens.main.MainViewModel
 import com.abora.githubtask.screens.qrScanner.QrScannerActivity
 import com.abora.githubtask.utils.NfcUtil
 import com.abora.githubtask.utils.PaginationListener
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlin.reflect.KClass
 
@@ -82,7 +83,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(),
 
     override fun onUserClick(item: UserRepositoriesData, view: View) {
         val bundle = Bundle()
-        bundle.putInt("id", 0)
+        bundle.putString("data", Gson().toJson(item))
         Navigation.findNavController(view)
             .navigate(R.id.action_mainFragment_to_detailsFragment, bundle)
     }

@@ -581,6 +581,25 @@ object MyUtils {
         Toast.makeText(context, "textCopy", Toast.LENGTH_SHORT).show()
     }
 
+    fun Activity.openBrowser(target: String) {
+        openBrowserEngine(target,this)
+    }
+
+    fun Fragment.openBrowser(target: String) {
+        openBrowserEngine(target,this.activity)
+    }
+
+    private fun openBrowserEngine(targetUrl: String, activity: Activity?){
+        var url=targetUrl
+        if (!targetUrl.startsWith("http://") && !targetUrl.startsWith("https://")){
+            url= "http://$targetUrl"
+        }
+
+        val browserIntent =
+            Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        activity?.startActivity(browserIntent)
+    }
+
 }
 
 

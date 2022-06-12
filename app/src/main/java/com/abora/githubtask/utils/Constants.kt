@@ -1,6 +1,6 @@
 package com.abora.githubtask.utils
 
 object Constants {
-    const val AuthToken = "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"
+    const val AuthToken = "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"
 
 }

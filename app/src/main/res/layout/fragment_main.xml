@@ -5,28 +5,33 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/bg"
         tools:context=".screens.main.fragmentMain.MainFragment">
+
+        <include
+            android:id="@+id/toolBar"
+            layout="@layout/toolbar_default_title"
+            app:toolText="@{@string/search_repository}" />
 
         <LinearLayout
             android:id="@+id/laySearch"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:background="@drawable/rounded_off_gray_5"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_8sdp"
+            android:background="@drawable/rounded_off_gray_5"
             android:gravity="center"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolBar">
 
             <EditText
                 android:id="@+id/edSearch"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="@dimen/_30sdp"
+                android:layout_weight="1"
                 android:background="@null"
                 android:drawableStart="@drawable/ic_search"
                 android:drawablePadding="@dimen/_8sdp"
@@ -34,17 +39,15 @@
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1"
-                android:padding="@dimen/_4sdp"
-                />
+                android:padding="@dimen/_4sdp" />
 
             <ImageView
                 android:id="@+id/ivQrScanner"
-                android:layout_marginStart="@dimen/_4sdp"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ic_qr_scanner"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:src="@drawable/ic_qr_scanner" />
         </LinearLayout>
-
 
 
         <androidx.recyclerview.widget.RecyclerView
