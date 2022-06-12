@@ -80,7 +80,7 @@ fun getOkHttp(
                     builder.addHeader("App-Version", "1")
                 }
 
-                    .addHeader("Authorization","${Constants.AuthToken}")
+                    .addHeader("Authorization","token ${Constants.AuthToken}${Constants.AuthToken2}")
 
                 val response = chain.proceed(builder.build())
                 response
