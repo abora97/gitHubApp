@@ -88,4 +88,7 @@ dependencies {
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
 
+    // Qr Scanner
+    implementation 'com.budiyev.android:code-scanner:2.1.0'
+
 }

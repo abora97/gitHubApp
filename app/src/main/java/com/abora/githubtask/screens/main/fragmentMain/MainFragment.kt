@@ -1,5 +1,6 @@
 package com.abora.githubtask.screens.main.fragmentMain
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -12,6 +13,7 @@ import com.abora.githubtask.base.BaseFragment
 import com.abora.githubtask.data.models.UserRepositoriesData
 import com.abora.githubtask.databinding.FragmentMainBinding
 import com.abora.githubtask.screens.main.MainViewModel
+import com.abora.githubtask.screens.qrScanner.QrScannerActivity
 import com.abora.githubtask.utils.NfcUtil
 import com.abora.githubtask.utils.PaginationListener
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -68,6 +70,11 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(),
 
         })
 
+        edSearch.setOnClickListener {
+            startActivityForResult(Intent(requireActivity(), QrScannerActivity::class.java), 200)
+
+        }
+
     }
 
     override fun callApis() {
@@ -92,5 +99,18 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(),
         }
     }
 
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 200) {
+            if (data != null) {
+                if (data.extras!!.containsKey("qrCode")) {
+                    if (data.getStringExtra("qrCode").isNullOrEmpty().not()){
+                        viewModel.searchWordLiveData.value = data.getStringExtra("qrCode").toString().trim()
+                        viewModel.pageLiveData.value = 1
+                        callApis()
+                    }
+                }
+            }
+        }
+    }
 }
