@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.provider.Settings
 import com.abora.githubtask.data.remote.RetrofitApi
+import com.abora.githubtask.utils.Constants
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
@@ -79,16 +80,9 @@ fun getOkHttp(
                     builder.addHeader("App-Version", "1")
                 }
 
-                if (sharedPreferences.contains("token")) {
-                    builder.addHeader(
-                            "Authorization",
-                            "Bearer ${sharedPreferences.getString("token", "")}"
-                    )
-                }
+                    .addHeader("Authorization","token ${Constants.AuthToken}")
+
                 val response = chain.proceed(builder.build())
-
-
-
                 response
             }
             .build()

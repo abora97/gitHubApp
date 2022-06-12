@@ -108,6 +108,10 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         myToast(exception.toString())
     }
 
+ override fun onNotAuthorized(exception: String?) {
+     myToast(exception.toString())
+    }
+
     override fun onBadRequest(exception: String?) {
         myToast(exception.toString())
     }
