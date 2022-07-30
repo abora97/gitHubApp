@@ -9,7 +9,7 @@ import com.abora.githubtask.data.remote.reporsitory.MainRepository
 import kotlinx.coroutines.launch
 
 
-class MainViewModel constructor(var mainRepository: MainRepository, val context: Context) :
+class MainViewModel constructor(var mainRepository: MainRepository) :
     BaseViewModel() {
 
     //Fields
