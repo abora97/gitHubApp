@@ -10,7 +10,7 @@ import com.abora.githubtask.databinding.ItemUsersBinding
 
 class UserDataAdapter constructor(
     val actions: UserAction
-) : RecyclerView.Adapter<UserDataAdapter.MyHolder>() {
+) : RecyclerView.Adapter<UserDataAdapter.ViewHolder>() {
 
     var list: MutableList<UserRepositoriesData> = arrayListOf()
     lateinit var context: Context
@@ -25,30 +25,47 @@ class UserDataAdapter constructor(
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         context = parent.context
-        return MyHolder(
-            ItemUsersBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+
+        val viewHolder =  ItemUsersBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
+
+        return ViewHolder(viewHolder){
+            actions.onUserClick(list[it],parent)
+        }
     }
 
 
     override fun getItemCount(): Int = list.size
 
-    override fun onBindViewHolder(holder: MyHolder, position: Int) {
-        holder.sliderRowBinding.data =  list[position]
-        holder.itemView.setOnClickListener {
-            actions.onUserClick(list[position],holder.itemView)
-        }
-
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(list[position])
     }
 
-    inner class MyHolder(val sliderRowBinding: ItemUsersBinding) :
-        RecyclerView.ViewHolder(sliderRowBinding.root)
+    class ViewHolder(
+        itemListView: ItemUsersBinding,
+        onItemClicked: (Int) -> Unit
+    ) : RecyclerView.ViewHolder(itemListView.root) {
+        private var binding: ItemUsersBinding? = null
+
+        init {
+            binding=itemListView
+            itemListView.root.setOnClickListener {
+                // this will be called only once.
+                onItemClicked(adapterPosition)
+            }
+        }
+
+        fun bind(data: UserRepositoriesData) {
+            //bind data with the component
+            binding?.data=data
+        }
+    }
 
     interface UserAction {
         fun onUserClick(item: UserRepositoriesData, view: View)
